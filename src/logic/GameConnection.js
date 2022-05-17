@@ -1,0 +1,2 @@
+Game = require('./Game.js');
+

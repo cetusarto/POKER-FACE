@@ -6,27 +6,24 @@ module.exports = class Game {
         this.players = players;
         this.deck = new Deck();
 
-        //CARDS
         this.playerCards = [];
         this.tableCards = [];
         this.resetGame();
 
         this.inGame = []
         this.resetInGame()
-        this.turn=-1
+        this.turn = -1
     }
 
     //Turn
-    nextTurn(){
-        if(this.turn==-1 || this.turn == this.players-1){
-            this.turn=0
+    nextTurn() {
+        if (this.turn == -1 || this.turn == this.players - 1) {
+            this.turn = 0
         }
-        else{
+        else {
             this.turn++;
         }
-
     }
-
     //In or Out
     //Player gets in bet
     imIn(player) {
@@ -71,7 +68,7 @@ module.exports = class Game {
         for (let i = 0; i < this.players; i++) {
             this.inGame.push(false)
         }
-        
+
 
     }
 
