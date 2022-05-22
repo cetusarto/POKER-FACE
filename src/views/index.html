@@ -9,11 +9,23 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io()
+        socket.on("hello", (arg) => {
+            console.log(arg); // world
+        });
+
+        function heya(){
+            socket.emit("hello", "world");
+        }
+
+        
+
     </script>
 </head>
 
 <body>
-
+    <button onclick="heya()">
+        hello
+    </button>
 </body>
 
 </html>
