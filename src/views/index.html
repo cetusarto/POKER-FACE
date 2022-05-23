@@ -5,27 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        let socket = io()
-        socket.on("hello", (arg) => {
-            console.log(arg); // world
-        });
-
-        function heya(){
-            socket.emit("hello", "world");
-        }
-
-        
-
-    </script>
+    <title>main</title>
 </head>
 
 <body>
-    <button onclick="heya()">
-        hello
-    </button>
-</body>
+    <h1>This is the main menu</h1>
+    <a href="/game">
+        <button>game</button>
+      </a> </body>
 
 </html>

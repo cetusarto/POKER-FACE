@@ -8,12 +8,16 @@ const session = require('express-session')
 const port = process.env.PORT || 3000;
 
 //Import routes
-const gameRoutes = require('./routes/gameRoutes')
+const routes = require('./routes/routes')
 
 
 // settings
 app.set('port', port);
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 
 //Middleware
@@ -23,13 +27,8 @@ app.use(session({
   saveUninitialized: true
 }))
 
-//Serves all the request which includes /images in the url from Images folder
-app.use('/public', express.static(path.join(__dirname,'public')));
-
-
 //Routes
-app.use('/', gameRoutes);
-
+app.use('/', routes);
 
 // Server selection
 const server = app.listen(port, () => {
@@ -39,14 +38,24 @@ const server = app.listen(port, () => {
 
 // Socket management
 const io = socket(server);
+const connectHandler = require('./handlers/connectHandler');
+const disconnectHandler = require('./handlers/disconnectHandler');
+const gameHandler = require('./handlers/gameHandler');
+const Game = require('./logic/Game');
 
 
+var game = new Game(2);
+var table = {
+  players: {},
+  onGame: false
+}
 
-io.on("connection", (socket) => {
-  socket.on("hello", (arg) => {
-    console.log(arg, socket.id);
-  });
 
+const onConnection = (socket) => {
+  connectHandler(io, socket);
+  gameHandler(io, socket, table, game)
+  disconnectHandler(io, socket, table, game);
+}
 
-  
-});
+io.on("connect", onConnection);
+

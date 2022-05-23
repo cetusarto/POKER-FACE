@@ -8,10 +8,8 @@ module.exports = class Game {
 
         this.playerCards = [];
         this.tableCards = [];
+        this.inGame = [];
         this.resetGame();
-
-        this.inGame = []
-        this.resetInGame()
         this.turn = -1
     }
 
@@ -59,7 +57,7 @@ module.exports = class Game {
         this.tableCards = [null, null, null, null, null]
 
         //Resets playerCards array
-        for (let i = 0; i < players; i++) {
+        for (let i = 0; i < this.players; i++) {
             this.playerCards.push([null, null])
         }
 
