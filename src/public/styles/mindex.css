@@ -1,0 +1,276 @@
+.board{
+    background-color:green;
+    height: calc(100vh - 90px);
+    border-radius: 100px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-areas: "box1 box2 box3"
+                         "box4 box5 box6"
+                         "box7 box8 box9";
+    justify-content: center;
+}
+
+
+.box1{
+    grid-area: box1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+                         
+}
+.box2{
+    grid-area: box2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+.box3{
+    grid-area: box3;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+.box4{
+    grid-area: box4;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+.box5{
+    grid-area: box5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.box6{
+    grid-area: box6;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+.box7{
+    grid-area: box7;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+.box8{
+    position: relative;
+    grid-area: box8;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+
+    justify-content: center;
+    border: 0px solid black; 
+    align-items: center;
+    
+}
+
+.box9{
+    grid-area: box9;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    border: 0px solid black;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50% ;
+    grid-template-areas: "cards cards"
+                         "token commands";
+}
+
+
+.box__cards{
+    grid-area: cards;
+    border: 3px solid black;
+    background:red;
+    display: inline;
+}
+.box__token{
+    grid-area: token;
+    border: 0px solid black;
+    /* background:blue; */
+}
+.box__commands{
+    grid-area: commands;
+    border: 0px solid black;
+    /* background: yellow; */
+}
+
+.edges_Brown{
+    background-color: rgba(155, 125, 103);
+    padding:20px;
+    border-radius: 100px;
+}
+
+.edges_Black{
+    background-color: rgb(12, 8, 6);
+    padding:20px;
+    border-radius: 100px;
+    border: 5px solid rgb(119, 125, 126);
+}
+
+.btn{
+    position: absolute;
+    width: 100%;
+    height: 80%;   
+    font-size: 40px;
+    font-family:fantasy;
+    font-style: italic;
+    border-radius: 70px;
+    background: #3e5f8a;
+    color: white;
+}
+.btn:hover{
+    background:#6893cc;
+    color: rgba(7, 7, 7);
+}
+
+.pot{
+    position: relative;
+    background: rgb(6, 70, 6);
+    border-radius:15%;
+    border: 3px solid black;
+    height:100%;
+    width:100%;
+    transform: translate(50%, 50%);
+    color: white;
+    font-family:fantasy;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.border_card{
+    height:95%;
+    width:30%;
+    min-width: 100px;
+    border-radius: 25%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    font-size: 40px;
+    border: 2px solid black;
+}
+
+.input{
+    background: cornsilk;
+    border-radius:10px;
+    height: 50%;
+    width: 46.5%;
+}
+.buttons{
+    height:40%;
+    width:10px;
+    background:rgb(152, 87, 87);
+    border-radius: 10px;
+    width: 32%;
+    margin-left: 10px;
+      
+    top: 40%;
+    left: 40%;
+    text-align: center;
+    background: black;
+    color: white;
+    border-radius: 60px;
+    border: 4px solid black;
+    box-shadow: inset 0 0 30px rgb(97, 96, 96);
+}
+.buttons:hover{
+    background:red;
+    color:white;
+}
+
+.buttons::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height:50%;
+    width:10px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.5s;
+    transform: skewX(-15deg);
+  }
+  .buttons:hover::before {
+    left: 190px;
+  }
+ 
+  .buttons::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -70px;
+    height:100%;
+    width:10px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.5s;
+    transform: skewX(-15deg);
+  }
+ .buttons:hover::after {
+    left: 190px;
+  }
+
+.button_confirm{
+    border-radius: 4px;
+    background:#3e5f8a;
+}
+
+.button_confirm:hover{
+    background:#6893cc;
+    color: rgba(7, 7, 7);
+}
+
+#card_1{
+    position: relative;
+    left: 100px;
+}
+#card_2{
+    position: relative;
+    right:50px;
+}

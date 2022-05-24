@@ -1,17 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <link href="/styles/mindex.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/gameClient.js"></script>
+
 </head>
-
 <body>
-    <h1>This is the main menu</h1>
-    <a href="/game">
-        <button>game</button>
-      </a> </body>
 
+    <div class="edges_Black" id='border_0'>
+        <div class="edges_Brown" id='border_1'>
+            <div class="board">                                                                                                            
+            <!-- __________________CARTAS EN MESA__________________ -->
+                <div class="box5">
+                    
+                    <div class=''>
+                        <div class="border_card">13❤</div> 
+                    </div>
+                    <div class=''>
+                        <div class="border_card">3🍀</div> 
+                    </div>
+                    <div class=''>
+                        <div class="border_card">13💎</div> 
+                    </div>
+                    <div class=''>
+                        <div class="border_card">12♠</div> 
+                    </div>
+                    <div class=''>
+                        <div class="border_card">4❤</div> 
+                    </div>
+
+                </div>
+
+                <div class="box2"}>
+                    <div>
+                        <div class="pot">POT : $0</div>
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_1__________________ -->
+                <div class="box1"} id="JUGADOR_1"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">8❤</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">6🍀</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_2__________________ -->
+                <div class="box4" id="JUGADOR_2"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">3🍀</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">7❤</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_3__________________ -->
+                <div class="box7"} id="JUGADOR_3"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">2❤</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">5♠</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_4__________________ -->
+                <div class="box9" id="JUGADOR_4"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">3❤</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">7♠</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_5__________________ -->
+                <div class="box6" id="JUGADOR_5"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">3💎</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">10❤</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <!-- __________________JUGADOR_6__________________ -->
+                <div class="box3" id="JUGADOR_6"> 
+                    <div class='' id="card_1">
+                        <div class="border_card">11❤</div> 
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">14💎</div> 
+                    </div>
+        
+                    <div class="box__token"> 
+                            <input type="number" placeholder='$0' id="" class="input" required/>
+                            <button id="setmoney" onClick="" class="buttons">tokens</button>
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="">
+                            <input type='number' onChange="" placeholder='$0' class="input" required/>
+                            <input type='submit' value='Subir apuesta' class="button_confirm"/>
+                        </form>            
+                        <button type='button'  value='Fold'  onClick="" class="buttons">Retirarse</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Igualar</button>
+                        <button type='button'  value='Call'  onClick="" class="buttons">Pasar</button>
+                        <button type='button'  value='Check' onClick="" class="buttons">All in</button> 
+                    </div>
+                </div>
+                <div class="box8"> 
+                    <button onClick="" class="btn">Comenzar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
 </html>

@@ -1,11 +1,20 @@
 const path = require('path');
 const express = require('express');
-
-
 const socket = require('socket.io');
 const app = express();
-const session = require('express-session')
+const session = require('express-session');
 const port = process.env.PORT || 3000;
+
+
+var mysql = require('mysql'), // node-mysql module
+    myConnection = require('express-myconnection'), // express-myconnection module
+    dbOptions = {
+      host: 'localhost',
+      user: 'root',
+      password: 'ThisIsMyPassword123',
+      port: 3306,
+      database: 'pokerface'
+    };
 
 //Import routes
 const routes = require('./routes/routes')
@@ -13,12 +22,15 @@ const routes = require('./routes/routes')
 
 // settings
 app.set('port', port);
-app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.use(myConnection(mysql, dbOptions, 'single'));
 
+
+
+app.use('/public', express.static(__dirname + '/public'));
 
 //Middleware
 app.use(session({

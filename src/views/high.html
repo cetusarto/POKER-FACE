@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highscores</title>
+    <style>
+        body {
+            background-image: url("../public/images/poker.webp");
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr {
+            background-color: #f2f2f2;
+        }
+
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #035f3d;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <center>
+        <font size="+10" style="font-family: verdana; color: #035f3d;">
+            <b>Highscores de Poker Face</b>
+        </font>
+    </center>
+    <br>
+    <br>
+
+    <center>
+        <div class="container">
+            <table class="table" id="customers">
+                <thead>
+                    <tr>
+                        <th>Nickname</th>
+                        <th>Total de Ganancias</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+
+                </tbody>
+            </table>
+        </div>
+    </center>
+
+
+</body>
+
+<script>
+    fetch("http://localhost:3000/highDB").then(
+        res => {
+            res.json().then(
+                data => {
+                    if (data.length > 0) {
+
+                        var temp = "";
+                        data.forEach((itemData) => {
+                            temp += "<tr>";
+                            temp += "<td>" + itemData.nickname + "</td>";
+                            temp += "<td>" + itemData.earnings + "</td></tr>";
+                        });
+                        document.getElementById('data').innerHTML = temp;
+                    }
+                }
+            )
+        }
+    )
+</script>
+
+</html>
