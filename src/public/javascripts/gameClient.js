@@ -8,7 +8,10 @@ var cards;
 var onGamePlayers;
 var playerPos;
 var playerMoney;
+var money;
+var tablePot;
 var competitors = {};
+var bet;
 
 //Elements
 var readyButton;
@@ -112,6 +115,7 @@ function enableMoves() {
 function assignCompetitorNumber() {
     var keys = Object.keys(money);
     var id = 0;
+    console.log(money)
     for (let i of keys) {
         if (i == this.pos) { continue; }
         competitors[i] = id;
@@ -123,7 +127,7 @@ function assignCompetitorNumber() {
 // DOCUMENT SETTING
 //Sets Personal Money
 function setPersonalMoney() {
-    token.value = this.money[this.pos]
+    token.value = this.playerMoney
 }
 // Sets competitors elements
 function setCompetitorElements() {
@@ -146,30 +150,41 @@ function setCardsFirstTime() {
         this.ownCards[i].suit.src = getSuitRoute(playerCards[i].charAt(1))
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
         this.tableCards[i].number.innerText = tableCards[i].charAt(0);
         this.tableCards[i].suit.src = getSuitRoute(tableCards[i].charAt(1))
     }
 
 }
+
+
 //Shows players when the other is moving
-function playerMoving(turn, reason) {
+function playerMoving(turn, reason, pMoney) {
+
     const number = this.competitors[turn];
     var lines = this.players[number].text.innerText.split("\n");
     var state = "";
     if (reason === 'playing') { state = "\n Turno del jugador" }
     if (reason === 'fold') { state = "\n Jugador se rindió" }
+    if (reason === 'check') { state = "\n Jugador checkeó" }
+    if (reason === 'allin') { state = "\n Jugador fue All IN" }
+
 
     if (lines.length == 2) {
         this.players[number].text.innerText += state;
     } else if (lines.length == 3) {
-        this.players[number].text.innerText = lines[0] + "\n" + lines[1] + state;
+        var secondLine = lines[1]
+        if (pMoney != 0) { secondLine = "Dinero $" + pMoney }
+        this.players[number].text.innerText = lines[0] + "\n" + secondLine + state;
     }
+}
+function setPot() {
+    this.pot.innerHTML = this.tablePot;
 }
 
 //ON CLICK
 function readyToPlay() {
-    readyButton.style.display = "none";
+    dissapear(readyButton)
     if (!ready) {
         socket.emit("game::playerReady")
         ready = true;
@@ -180,18 +195,50 @@ function folding() {
     disableMoves();
 }
 function check() {
-    //TODO
+    this.socket.emit("game::playerChecks", this.pos);
 }
-function call() { }
-function raise() { }
+function call(type) {
+    if (type === 1) {
+        if (this.bet >= this.playerMoney) { return call(2) }
+        this.playerMoney -= this.bet;
+        this.tablePot += this.bet;
+
+        this.socket.emit("game::playerCalls", this.pos, this.bet, false);
+        setPersonalMoney()
+        setPot()
+    }
+    if (type === 2) {
+        this.tablePot = this.playerMoney;
+
+        this.playerMoney = 0;
+        alert('All In!!')
+        this.socket.emit("game::playerCalls", this.pos, this.playerMoney, true);
+        setPersonalMoney()
+        setPot()
+    }
+}
+function raise() {
+    var moneyRaise = parseInt(this.raiseE.value);
+    console.log(moneyRaise)
+    if (this.bet + moneyRaise >= this.playerMoney) {
+        this.bet = this.bet + this.playerMoney;
+        return call(2)
+    }
+    else {
+        this.bet += moneyRaise;
+        return call(1)
+    }
+}
 
 
 
 //Game functions
 function startGame() {
     setPersonalMoney();
+    setPot();
     setCardsFirstTime();
     assignCompetitorNumber();
+    disableMoves()
     setCompetitorElements();
 }
 
@@ -199,25 +246,57 @@ function startGame() {
 //Socket
 socket.on("connect", () => { })
 socket.on("game::starting", () => {
-    socket.emit("game::getFirstCards")
+    socket.emit("game::getCards")
 })
 
-socket.on("game::gettingFirstCards", (cards, money, pos) => {
+
+socket.on("game::gettingCards", (cards, money, pos, pot, bet) => {
     this.cards = cards;
     this.money = money;
     this.pos = pos;
-
+    this.playerMoney = money[pos]
+    this.tablePot = pot;
+    this.bet = bet;
     startGame();
 })
 
 
 socket.on("game::getMove", () => {
-    alert("Es su turno, tiene 30 segundos para jugar");
-    setTimeout(folding, 2000);
+    enableMoves()
+    alert("Es su turno, tiene 30 segundos para jugar, la apuesta está en " + this.bet);
+    setTimeout(() => {
+        folding();
+        disableMoves()
+    }, 10000);
+
 })
 
-socket.on("game::playerState", (turn, reason) => {
-    playerMoving(turn, reason)
+socket.on("game::playerState", (turn, reason, pMoney = this.money[turn], pot = this.tablePot) => {
+    this.tablePot = pot;
+    this.pot.innerHTML = pot;
+    this.money[turn] = pMoney;
+    setPot()
+    playerMoving(turn, reason, pMoney)
+})
+
+socket.on("game::restart", () => {
+    show(readyButton);
+    ready = false;
+})
+
+socket.on("game::win", (message, winnerCards) => {
+    for (let i = 0; i < 2; i++) {
+        this.winnerCards[i].number.innerText = winnerCards[i].charAt(0);
+        this.winnerCards[i].suit.src = getSuitRoute(winnerCards[i].charAt(1))
+    }
+    alert(message);
+})
+socket.on("game::lose", (message,winnerCards) => {
+    for (let i = 0; i < 2; i++) {
+        this.winnerCards[i].number.innerText = winnerCards[i].charAt(0);
+        this.winnerCards[i].suit.src = getSuitRoute(winnerCards[i].charAt(1))
+    }
+    alert(message);
 })
 
 

@@ -13,7 +13,7 @@ module.exports = class Deck {
   reset() {
     this.deck = [];
     const suits = ['h', 'd', 'c', 's'];
-    const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K'];
+    const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K'];
 
     for (let suit in suits) {
       for (let value in values) {

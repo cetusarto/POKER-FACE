@@ -7,14 +7,14 @@ const port = process.env.PORT || 3000;
 
 
 var mysql = require('mysql'), // node-mysql module
-    myConnection = require('express-myconnection'), // express-myconnection module
-    dbOptions = {
-      host: 'localhost',
-      user: 'root',
-      password: 'ThisIsMyPassword123',
-      port: 3306,
-      database: 'pokerface'
-    };
+  myConnection = require('express-myconnection'), // express-myconnection module
+  dbOptions = {
+    host: 'localhost',
+    user: 'root',
+    password: 'ThisIsMyPassword123',
+    port: 3306,
+    database: 'pokerface'
+  };
 
 //Import routes
 const routes = require('./routes/routes')
@@ -59,8 +59,11 @@ const Game = require('./logic/Game');
 var game = new Game(2);
 var table = {
   players: {},
+  allIn:{},
   onGame: false,
-  money: {}
+  money: {},
+  pot: 0,
+  bet: 0
 }
 
 

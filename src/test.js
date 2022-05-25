@@ -10,17 +10,17 @@ describe('Game integration with Deck', function () {
         it('should return 43 when 2 players are inGame', function () {
             game.resetGame(2)
             game.dealAll()
-            assert.equal(game.deck.length(), 43);
+            assert.equal(game.deck.length(), 39);
         }),
             it('should return 41 when 3 players are inGame', function () {
                 game.resetGame(3)
                 game.dealAll()
-                assert.equal(game.deck.length(), 41);
+                assert.equal(game.deck.length(), 37);
             }),
             it('should return 37 when 5 players are inGame', function () {
                 game.resetGame(5)
                 game.dealAll()
-                assert.equal(game.deck.length(), 37);
+                assert.equal(game.deck.length(), 33);
             })
     });
 });

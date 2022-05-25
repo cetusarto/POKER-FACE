@@ -77,14 +77,15 @@
                     </div>
 
                     <div class="box__commands">
-                        <form onSubmit="">
-                            <input type='number' id="raise" onChange="" placeholder='$0' class="input" required />
-                            <input type='submit' id="raiseB" value='Subir apuesta' class="button_confirm" />
-                        </form>
+                        <div >
+                            <input type='number' id="raise" placeholder='$0' class="input" required />
+                            <input type='submit' onclick="raise()"  id="raiseB" value='Subir apuesta'
+                                class="button_confirm" />
+                        </div>
                         <button type='button' id='fold' onClick="folding()" class="buttons">Retirarse</button>
-                        <button type='button' id='call' onClick="" class="buttons">Igualar</button>
-                        <button type='button' id='check' onClick="" class="buttons">Check</button>
-                        <button type='button' id='allin' onClick="" class="buttons">All in</button>
+                        <button type='button' id='call' onClick="call(1)" class="buttons">Igualar</button>
+                        <button type='button' id='check' onClick="check()" class="buttons">Check</button>
+                        <button type='button' id='allin' onClick="call(2)" class="buttons">All in</button>
                     </div>
                 </div>
 
