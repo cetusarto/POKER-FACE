@@ -3,10 +3,12 @@ const Game = require("../logic/Game");
 module.exports = (io, socket, table, game) => {
 
     const playerReady = () => {
-
         table.players[socket.id] = Object.keys(table.players).length;
         socket.join("readyPlayers");
         table.money[table.players[socket.id]] = 1000;
+        table.checked[table.players[socket.id]] = false;
+
+
         if (Object.keys(table.players).length >= 2 && !table.onGame) {
             startGame()
         }
@@ -48,18 +50,32 @@ module.exports = (io, socket, table, game) => {
         var sum = game.inGame.reduce((partialSum, a) => partialSum + a, 0);
         if (sum == 1) {
             var person = game.inGame.indexOf(true);
-            sendWin(person);
+            sendWin(person, 'Ganaste por W', 'Gano por W el jugador');
             return true;
         }
         return false;
     }
 
-    const sendWin = (winnerID) => {
+    const getWinner = () => {
+        const sum = obj => Object.values(table.checked).reduce((a, b) => a + b);
+        if (sum == Object.keys(table.checked).length) {
+            console.log('hey')
+            var winners = game.getWinner();
+            var id = winners[0]
+            var desc = winners[1]
+            var cards = winners[2]
+            sendWin(id, "You won with " + desc, "Player 1 won with " + desc)
+            return true
+        }
+        return false
+
+    }
+    const sendWin = (winnerID, messageWinner, messageLoser) => {
         var socketIds = Object.keys(table.players)
         table.money[winnerID] = table.pot;
         var winnerCards = game.playerCards[winnerID];
-        io.to(socketIds[winnerID]).emit("game::win", 'Ganaste por W', winnerCards)
-        io.except(socketIds[winnerID]).emit("game::lose", "Ganó por W el jugador " + winnerID,winnerCards)
+        io.to(socketIds[winnerID]).emit("game::win", messageWinner, winnerCards)
+        io.except(socketIds[winnerID]).emit("game::lose", messageLoser, winnerCards)
         restartGame();
     }
 
@@ -68,6 +84,7 @@ module.exports = (io, socket, table, game) => {
         const turn = game.turn;
         if (turn == -1) { return }
         if (checkWWin()) { return };
+        if (getWinner()) { return }
         var socketIds = Object.keys(table.players)
         io.to(socketIds[turn]).emit("game::getMove")
         io.to('readyPlayers').except(socketIds[turn]).emit("game::playerState", turn, 'playing')
@@ -76,6 +93,7 @@ module.exports = (io, socket, table, game) => {
     // Moves
     const playerFolds = (id) => {
         game.imOut(id)
+        table.checked[id] = true;
         var socketIds = Object.keys(table.players)
         io.to('readyPlayers').except(socketIds[id]).emit("game::playerState", id, 'fold')
         requestMove();
@@ -83,6 +101,7 @@ module.exports = (io, socket, table, game) => {
 
     const playerChecks = (id) => {
         game.imIn(id);
+        table.checked[id] = true;
         var socketIds = Object.keys(table.players)
         io.to('readyPlayers').except(socketIds[id]).emit("game::playerState", id, 'check')
         requestMove();

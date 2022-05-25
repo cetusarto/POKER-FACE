@@ -63,7 +63,8 @@ var table = {
   onGame: false,
   money: {},
   pot: 0,
-  bet: 0
+  bet: 0,
+  checked: {}
 }
 
 
