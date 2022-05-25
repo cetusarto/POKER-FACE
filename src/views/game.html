@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/public/images/pokericon.png" />
     <link href="/public/styles/mindex.css" rel="stylesheet" type="text/css">
-    <title>Document</title>
+    <title>Poker Face</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/public/javascripts/gameClient.js"></script>
 
@@ -77,14 +77,14 @@
                     </div>
 
                     <div class="box__commands">
-                        <form onSubmit="" id="raise">
-                            <input type='number' onChange="" placeholder='$0' class="input" required />
-                            <input type='submit' value='Subir apuesta' class="button_confirm" />
+                        <form onSubmit="">
+                            <input type='number' id="raise" onChange="" placeholder='$0' class="input" required />
+                            <input type='submit' id="raiseB" value='Subir apuesta' class="button_confirm" />
                         </form>
-                        <button type='button' id='fold' onClick="" class="buttons">Retirarse</button>
-                        <button type='button' id='meet' onClick="" class="buttons">Igualar</button>
-                        <button type='button' id='call' onClick="" class="buttons">Pasar</button>
-                        <button type='button' id='check' onClick="" class="buttons">All in</button>
+                        <button type='button' id='fold' onClick="folding()" class="buttons">Retirarse</button>
+                        <button type='button' id='call' onClick="" class="buttons">Igualar</button>
+                        <button type='button' id='check' onClick="" class="buttons">Check</button>
+                        <button type='button' id='allin' onClick="" class="buttons">All in</button>
                     </div>
                 </div>
 

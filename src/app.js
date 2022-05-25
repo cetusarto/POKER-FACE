@@ -59,7 +59,8 @@ const Game = require('./logic/Game');
 var game = new Game(2);
 var table = {
   players: {},
-  onGame: false
+  onGame: false,
+  money: {}
 }
 
 

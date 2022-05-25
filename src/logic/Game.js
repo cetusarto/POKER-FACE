@@ -15,10 +15,13 @@ module.exports = class Game {
 
     //Turn
     nextTurn() {
+        if (this.inGame.reduce((partialSum, a) => partialSum + a, 0) == 0) { this.turn = -1; return }
         if (this.turn == -1 || this.turn == this.players - 1) {
+            if (!this.inGame[0]) { this.turn = 0; this.nextTurn(); return }
             this.turn = 0
         }
         else {
+            if (!this.inGame[this.turn + 1]) { this.turn++; this.nextTurn(); return }
             this.turn++;
         }
     }
@@ -64,7 +67,7 @@ module.exports = class Game {
         //Resets inGame array
         this.inGame = []
         for (let i = 0; i < this.players; i++) {
-            this.inGame.push(false)
+            this.inGame.push(true)
         }
 
 
