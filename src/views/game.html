@@ -5,21 +5,133 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <link rel="icon" type="image/png" href="/public/images/pokericon.png" />
+    <link href="/public/styles/mindex.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/javascripts/gameClient.js"></script>
 
 </head>
 
 <body>
-    <button onclick="readyToPlay()" id="ready">
-        Are you ready?
-    </button>
-    <button onclick="test()">
-        test
-    </button>
-    <input type="text" id="name">
-    </input>
-    <p id="hola"></p>
-</body>
 
+    <div class="edges_Black" id='border_0'>
+        <div class="edges_Brown" id='border_1'>
+            <div class="board">
+                <i class="heart"></i>
+
+                <!-- __________________CARTAS EN MESA__________________ -->
+                <div class="box5" id="tableCards">
+
+                    <div class="border_card" id="tableCard1">
+                        <p id="numberTableCard1"></p>
+                        <img id="suitTableCard1" src="/public/images/diamond.png" width="30px" height="30px">
+                    </div>
+                    <div class="border_card" id="tableCard2">
+                        <p id="numberTableCard2"></p>
+                        <img id="suitTableCard2" src="/public/images/diamond.png" width="30px" height="30px">
+                    </div>
+                    <div class="border_card" id="tableCard3">
+                        <p id="numberTableCard3"></p>
+                        <img id="suitTableCard3" src="/public/images/diamond.png" width="30px" height="30px">
+                    </div>
+
+                    <div class="border_card" id="tableCard4">
+                        <p id="numberTableCard4"></p>
+                        <img id="suitTableCard4" src="/public/images/diamond.png" width="30px" height="30px">
+                    </div>
+
+                    <div class="border_card" id="tableCard5">
+                        <p id="numberTableCard5"></p>
+                        <img id="suitTableCard5" src="/public/images/diamond.png" width="30px" height="30px">
+                    </div>
+
+                </div>
+
+                <!-- __________________Pot__________________ -->
+                <div class="box2">
+                    <div>
+                        <div class="pot">POT : <p id="pot">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- __________________JUGADOR__________________ -->
+                <div class="box9" id="JUGADOR">
+                    <div class='' id="card_1">
+                        <div class="border_card">
+                            <p id="numberCard1"></p>
+                            <img id="suitCard1" src="/public/images/diamond.png" width="30px" height="30px">
+                        </div>
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">
+                            <p id="numberCard2"></p>
+                            <img id="suitCard2" src="/public/images/diamond.png" width="30px" height="30px">
+                        </div>
+                    </div>
+
+                    <div class="box__token">
+                        <input type="number" placeholder='$0' id="token" class="input" required />
+                    </div>
+
+                    <div class="box__commands">
+                        <form onSubmit="" id="raise">
+                            <input type='number' onChange="" placeholder='$0' class="input" required />
+                            <input type='submit' value='Subir apuesta' class="button_confirm" />
+                        </form>
+                        <button type='button' id='fold' onClick="" class="buttons">Retirarse</button>
+                        <button type='button' id='meet' onClick="" class="buttons">Igualar</button>
+                        <button type='button' id='call' onClick="" class="buttons">Pasar</button>
+                        <button type='button' id='check' onClick="" class="buttons">All in</button>
+                    </div>
+                </div>
+
+                <!-- __________________Ganador__________________ -->
+                <div class="box1" id="ganador">
+                    <div class='' id="card_1">
+                        <div class="border_card">
+                            <p id="numberCardGanador1"></p>
+                            <img id="suitCardGanador1" src="/public/images/diamond.png" width="30px" height="30px">
+                        </div>
+                    </div>
+
+                    <div class='' id="card_2">
+                        <div class="border_card">
+                            <p id="numberCardGanador2"></p>
+                            <img id="suitCardGanador2" src="/public/images/diamond.png" width="30px" height="30px">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- __________________Start__________________ -->
+                <div class="box8">
+                    <button onClick="readyToPlay()" id="ready" class="btn">Comenzar</button>
+                </div>
+
+                <div class="box3" id="player1">
+                    <img id="img1" class="img" src="/public/images/player.png" width="100px" height="100px">
+                    <p class="texto" id="txt1"></p>
+                </div>
+                <div class="box4" id="player2">
+                    <img id="img2" class="img" src="/public/images/player.png" width="100px" height="100px">
+                    <p class="texto" id="txt2"></p>
+                </div>
+                <div class="box6" id="player">
+                    <img id="img3" class="img" src="/public/images/player.png" width="100px" height="100px">
+                    <p class="texto" id="txt3"></p>
+                </div>
+                <div class="box7" id="player4">
+                    <img id="img4" class="img" src="/public/images/player.png" width="100px" height="100px">
+                    <p class="texto" id="txt4"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
 
 </html>

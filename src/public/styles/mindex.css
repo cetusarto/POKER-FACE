@@ -12,6 +12,20 @@
 }
 
 
+#player{
+    position: relative;
+    left: 20px;
+}
+.texto{
+    position: relative;
+    left: -100px;
+    font-family: fantasy;
+}
+.img{
+    display: none;
+}
+
+
 .box1{
     grid-area: box1;
     width: 100%;
@@ -268,7 +282,7 @@
 
 #card_1{
     position: relative;
-    left: 100px;
+    left: 80px;
 }
 #card_2{
     position: relative;

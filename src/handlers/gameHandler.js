@@ -6,6 +6,7 @@ module.exports = (io, socket, table, game) => {
 
         table.players[socket.id] = Object.keys(table.players).length + 1;
         socket.join("readyPlayers");
+        console.log(socket.id)
         if (Object.keys(table.players).length >= 2 && !table.onGame) {
             startGame()
         }
@@ -23,13 +24,14 @@ module.exports = (io, socket, table, game) => {
             {
                 tableCards: [game.tableCards[0], game.tableCards[1], game.tableCards[2], null, null],
                 playerCards: game.playerCards[table.players[socket.id] - 1]
-            }
+            },
+            table.players
         )
     }
 
     const test = () => {
 
-        console.log(game)
+        console.log(game);
     }
 
     socket.on("game::playerReady", playerReady);
